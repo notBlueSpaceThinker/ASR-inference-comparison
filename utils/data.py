@@ -1,6 +1,6 @@
 from torch.utils import data
 import torch
-import torchaudio
+import soundfile as sf
 import re
 
 
@@ -30,12 +30,15 @@ class Dataset(data.Dataset):
         self._validate_dataset()
 
         self.data_x = sorted(list(path_x.glob("*.wav")))
-        self.data_y = path_y / f"{self.path_x.stem}.txt"
         self.lenght = len(self.data_x)
 
     def __getitem__(self, index: int) -> tuple[tuple, str]:
-        x = torchaudio.load(self.data_x[index])
-        y = self.data_y[index].read_text(encoding="utf-8")
+        data, sample_rate = sf.read(self.data_x[index], dtype="float32")
+        waveform = torch.from_numpy(data).T
+        if waveform.ndim == 1:
+            waveform = waveform.unsqueeze(0)
+        x = (waveform, sample_rate)
+        y = (self.path_y  / f"{self.data_x[index].stem}.txt").read_text(encoding="utf-8")
         return x, y
 
     def __len__(self):
