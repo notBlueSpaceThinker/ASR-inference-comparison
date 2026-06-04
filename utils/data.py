@@ -1,8 +1,13 @@
-from torch.utils import data
-import torch
-import soundfile as sf
 import re
 
+import soundfile as sf
+import torch
+from torch.utils import data
+
+from config import DATA_PATH
+
+PATH_X = DATA_PATH / "data_x"
+PATH_Y = DATA_PATH / "data_y"
 
 class InconsistentDatasetError(Exception):
     """
@@ -88,3 +93,5 @@ class Dataset(data.Dataset):
                 raise InconsistentDatasetError(
                     "Meta file IDs contain slips"
                 )
+
+data_loader = data.DataLoader(Dataset(PATH_X, PATH_Y))
