@@ -16,7 +16,6 @@ class ModelInference:
     wer: list[float]
     cer: list[float]
     sample_infer_runtime: list[float]
-    total_infer_runtime: float
 
     def __len__(self):
         return len(self.predictions)
@@ -54,7 +53,7 @@ def run_inference(model_name: str, model: Any, data_loader: DataLoader):
         infer_runtimes.append(time.time() - start_time)
         predicted_text = " ".join([segment.text for segment in segments])
         predictions.append(predicted_text)
-        true_value = str(data_y)
+        true_value = data_y[0]
         true_values.append(true_value)
         wer.append(jiwer.wer(true_value, predicted_text))
         cer.append(jiwer.cer(true_value, predicted_text))
@@ -65,6 +64,5 @@ def run_inference(model_name: str, model: Any, data_loader: DataLoader):
         true_values=true_values,
         wer=wer,
         cer=cer,
-        sample_infer_runtime=infer_runtimes,
-        total_infer_runtime=sum(infer_runtimes)
+        sample_infer_runtime=infer_runtimes
     )
