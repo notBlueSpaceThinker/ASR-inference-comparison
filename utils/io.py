@@ -1,8 +1,11 @@
-import pandas as pd
-from models.inference import ModelInference
-from pathlib import Path
 from collections.abc import Iterable
+from pathlib import Path
+
+import pandas as pd
+
 from config import OUTPUT_PATH
+from models.inference import ModelInference
+
 
 def save_inference(inference: ModelInference, path: Path | str = OUTPUT_PATH) -> None:
     output_df = pd.DataFrame()

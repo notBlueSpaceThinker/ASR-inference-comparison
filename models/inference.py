@@ -2,11 +2,12 @@ import time
 from dataclasses import dataclass
 from typing import Any
 
-import numpy as np
 import jiwer
+import numpy as np
 import torch
 from torch.utils.data import DataLoader
 from tqdm import tqdm
+
 
 @dataclass
 class ModelInference:

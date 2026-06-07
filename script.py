@@ -1,12 +1,8 @@
-from config import DATA_PATH
-from utils import data
 from models.whisper import faster_model
 from utils.data import data_loader
 from utils.io import save_inference, load_inference
-from models.inference import run_inference, ModelInference
+from models.inference import run_inference
 
-PATH_X = DATA_PATH / "data_x"
-PATH_Y = DATA_PATH / "data_y"
 
 def main() -> None:
     infer = run_inference("whisper", faster_model, data_loader)
