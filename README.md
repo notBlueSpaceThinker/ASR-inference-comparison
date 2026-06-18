@@ -24,8 +24,8 @@ The project focuses on the automated inference of the model. For each sample, th
 
 Clone the repository:
 ```Bash
-git clone [https://github.com/notBlueSpaceThinker/Promt-Enginering-Assignment](https://github.com/notBlueSpaceThinker/Promt-Enginering-Assignment)
-cd Promt-Enginering-Assignment
+git clone https://github.com/notBlueSpaceThinker/ASR-inference-comparison
+cd ASR-inference-comparison
 ```
 
 Create and activate a virtual environment:
